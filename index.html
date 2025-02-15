@@ -3,9 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sliding Bar</title>
+  <title>Doom Control</title>
+  <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Digital+7&display=swap" rel="stylesheet">
   <style>
     body {
+      background-color: darkolivegreen;
       font-family: Arial, sans-serif;
       justify-content: center;
       align-items: center;
@@ -20,17 +23,46 @@
       width: 300px;
     }
     .value-display {
-      font-size: 18px;
-      font-weight: bold;
+        font-family: 'Digital 7', monospace;
+      font-size: 30px;
+      color: #0f9d58;  /* Bright green for digital display */
+      text-shadow: 
+        0 0 5px #0f9d58, 
+        0 0 10px #0f9d58, 
+        0 0 15px #0f9d58, 
+        0 0 20px #0f9d58, 
+        0 0 30px #0f9d58, 
+        0 0 40px #0f9d58; /* Green glow effect for the text */
+      letter-spacing: 5px; /* Slight letter spacing to mimic digital separation */
+    }
+    .title {
+      font-family: 'Russo One', sans-serif;
+      font-size: 3rem;
+      color: darkgreen; /* Dark Red color */
+      text-transform: uppercase;
+      letter-spacing: 5px;
+      text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
+      background: linear-gradient(90deg, #f39c12, #d32f2f); /* Gradient from orange to red */
+      -webkit-background-clip: text;
+      background-clip: text;
+      padding: 10px;
+      border-radius: 8px;
+      -webkit-text-stroke-width: 1px;
+      -webkit-text-stroke-color: black;
+    }
+
+    @keyframes blink {
+      50% {
+        visibility: hidden;
+      }
     }
   </style>
 </head>
 <body>
-    <link rel="icon" type="image/doomfavi" href="/images/doom.png">
   <div class="container">
-    <h2>Doom Control</h2>
+    <h2 class="title">Doom Control</h2>
     <input type="range" id="slider" class="slider" min="0" max="50" value="50">
-    <p class="value-display">Weekly Resources: <span id="value">50</span></p>
+    <p class="value-display">WEEKLY RESOURCES: <span id="value">50</span></p>
   </div>
 
   <script>
