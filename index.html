@@ -7,18 +7,17 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
       margin: 0;
     }
     .container {
-      text-align: center;
+      text-align: left;
+      padding-left: 5%;
     }
     .slider {
       width: 300px;
-      margin: 20px;
     }
     .value-display {
       font-size: 18px;
@@ -28,9 +27,9 @@
 </head>
 <body>
   <div class="container">
-    <h2>Sliding Bar (Max: 50)</h2>
+    <h2>Doom Control</h2>
     <input type="range" id="slider" class="slider" min="0" max="50" value="50">
-    <p class="value-display">Current Value: <span id="value">50</span></p>
+    <p class="value-display">Weekly Resources: <span id="value">50</span></p>
   </div>
 
   <script>
