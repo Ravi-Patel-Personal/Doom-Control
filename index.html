@@ -1,13 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Doom Control</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sliding Bar</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      text-align: center;
+    }
+    .slider {
+      width: 300px;
+      margin: 20px;
+    }
+    .value-display {
+      font-size: 18px;
+      font-weight: bold;
+    }
+  </style>
 </head>
 <body>
-    <h1>Hello, Web App!</h1>
-    <script src="script.js"></script>
+  <div class="container">
+    <h2>Sliding Bar (Max: 50)</h2>
+    <input type="range" id="slider" class="slider" min="0" max="50" value="50">
+    <p class="value-display">Current Value: <span id="value">50</span></p>
+  </div>
+
+  <script>
+    // Function to get the current date's time and end of the week timestamp
+    function getEndOfWeekTimestamp() {
+      const now = new Date();
+      const dayOfWeek = now.getDay(); // Get current day of the week (0 = Sunday)
+      const daysUntilEndOfWeek = 6 - dayOfWeek; // Days remaining until Sunday
+      now.setDate(now.getDate() + daysUntilEndOfWeek);
+      now.setHours(23, 59, 59, 999); // Set to end of day on Sunday
+      return now.getTime();
+    }
+
+    // Check if the sliding bar value and reset date are already stored
+    function initializeSlider() {
+      const now = new Date().getTime();
+      const endOfWeekTimestamp = getEndOfWeekTimestamp();
+      const storedValue = localStorage.getItem("sliderValue");
+      const storedResetTimestamp = localStorage.getItem("resetTimestamp");
+
+      if (!storedResetTimestamp || now > storedResetTimestamp) {
+        // Reset the slider value at the start of the week
+        localStorage.setItem("sliderValue", 50);
+        localStorage.setItem("resetTimestamp", endOfWeekTimestamp);
+      }
+
+      // Load the slider value from localStorage
+      const value = storedValue !== null ? parseInt(storedValue) : 50;
+      document.getElementById("slider").value = value;
+      document.getElementById("value").textContent = value;
+    }
+
+    // Update the value display and store the slider value in localStorage
+    function updateSliderValue() {
+      const slider = document.getElementById("slider");
+      const value = slider.value;
+      document.getElementById("value").textContent = value; // Update value text
+      localStorage.setItem("sliderValue", value);
+    }
+
+    // Initialize the slider when the page loads
+    window.onload = initializeSlider;
+
+    // Add an event listener to update the value when the slider changes
+    document.getElementById("slider").addEventListener("input", updateSliderValue);
+  </script>
 </body>
 </html>
